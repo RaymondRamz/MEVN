@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <form action="" method="POST">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre">
+
+        <label for="pass">Contraseña</label>
+        <input type="password" name="pass" id="pass">
+
+        <input type="submit" value="Enviar">
+    </form>
+
+
+    <script>
+        document.forms[0].addEventListener("submit", (event) => {
+          event.preventDefault();
+    
+          let data = {
+            USER: document.getElementById("nombre").value,
+            PASSWORD: document.getElementById("pass").value,
+          };
+          console.log("data", data);
+    
+          fetch("http://localhost:3000", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }).then(function (response) {
+            console.log(response);
+            return response.json();
+          });
+        });
+      </script>
+
+</body>
+</html>
